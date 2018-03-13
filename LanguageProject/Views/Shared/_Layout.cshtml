@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <!-- Google font -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:300,400,700,900' rel='stylesheet' type='text/css'>
+    <!-- Css -->
+    
+    @Styles.Render("~/Content/css")
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+    <title>@ViewBag.Title</title>
+    <script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1031554816897182');
+fbq('track', "PageView");</script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+             src="https://www.facebook.com/tr?id=1031554816897182&ev=PageView&noscript=1" />
+    </noscript>
+</head>
+<body id="page-top" class="home">
+
+    <!-- PAGE WRAP -->
+    <div id="page-wrap">
+
+
+        <!-- HEADER -->
+        <header id="header" class="header">
+            <div class="container">
+
+                <!-- LOGO -->
+                <div class="logo"><a href="index.html"><img src="images/logo.png" alt=""></a></div>
+                <!-- END / LOGO -->
+        @Html.Partial("_MainMenu")  
+
+            </div>
+        </header>
+        <!-- END / HEADER -->
+        <!-- BODY PAGE -->
+        @RenderBody()
+        @Html.Partial("_Footer")
+    </div>
+    <!-- END / PAGE WRAP -->
+    <!-- Load jQuery -->
+
+    @Scripts.Render("~/bundles/core-library")
+    @Scripts.Render("~/bundles/main-script")
+    
+    <script>
+   
+    </script>
+</body>
+</html>
