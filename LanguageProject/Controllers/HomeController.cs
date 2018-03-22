@@ -27,10 +27,22 @@ namespace LanguageProject.Controllers
         }
 
         // Register
-        public ActionResult Registers() {
+        public ActionResult Register() {
 
             return View();
 
+        }
+
+        // SearchResultFound
+        public ActionResult SearchResultFound()
+        {
+            return View();
+        }
+
+        // TeacherInfo
+        public ActionResult TeacherInfo()
+        {
+            return View();
         }
     }
 }
