@@ -18,7 +18,7 @@ namespace LanguageProject
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/main-script").Include(
-                    "~/Scripts/scripts.js"    
+                    "~/Scripts/scripts.js"
             ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

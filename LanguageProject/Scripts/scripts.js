@@ -7,6 +7,7 @@
         scrollStyle();
 
         $(".feature-slider").owlCarousel({
+            loop: true,
             autoPlay: 10000,
             items: 4,
             itemsDesktop : [1199,4],

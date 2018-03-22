@@ -545,10 +545,10 @@ h6,
 }
 .mc-item .image-author {
   position: absolute;
-  top: -20px;
+  top: -25px;
   left: 10px;
-  width: 26px;
-  height: 26px;
+  width: 30px;
+  
   overflow: hidden;
 }
 .mc-item .image-author img {

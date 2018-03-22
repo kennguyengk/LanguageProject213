@@ -19,12 +19,15 @@ namespace LanguageProject.Models
 
         public int Balance { get; set; }
         public virtual Languages NativeLang { get; set; }
-        public ICollection<SecondLanguages> SecondLang { get; set; }
+        public virtual ICollection<LanguageSkill> SecondLang { get; set; }
+        public virtual ICollection<Course> Courses { get; set; }
         public string AvatarPath { get; set; }
-        [Required]
-        public int Gender { get; set; }
+   
+        public string YouTubeLink { get; set; }
+       
         public string Quote { get; set; }
-
+       
+        public string TimeZone { get; set; }
         [Required]
         public string Email { get; set; }
     }

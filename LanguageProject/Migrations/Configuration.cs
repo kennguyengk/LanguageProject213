@@ -48,7 +48,8 @@ namespace LanguageProject.Migrations
             }
            
             context.SaveChanges();
-
+            Console.WriteLine("fadsfsa");
+           
             User one = new User { FName = "Paula", LName = "Caroline", Email = "paula@gmail.com", Role = roles[1], NativeLang = context.Languages.Find(4), Balance = 0 };
             User two = new User { FName = "Debora", LName = "Mayumi", Email = "yumi@gmail.com", Role = roles[1], NativeLang = context.Languages.Find(5), Balance = 0 };
 
@@ -56,13 +57,15 @@ namespace LanguageProject.Migrations
             context.Users.Add(two);
             //users.ForEach(s => context.Users.AddOrUpdate(s));
 
+
             context.SaveChanges();
 
-            SecondLanguages language_one = new SecondLanguages { Language = languages[5], User = one, Level = 9 };
-            SecondLanguages langue_two = new SecondLanguages { Language = languages[4], User = two, Level = 8 };
-            context.SecondLanguages.AddOrUpdate(language_one);
-            context.SecondLanguages.AddOrUpdate(langue_two);
-            context.SaveChanges();
+             LanguageSkill language_one = new LanguageSkill { Language = languages[5], User = one, Level = 9 };
+             LanguageSkill langue_two = new LanguageSkill { Language = languages[4], User = two, Level = 8 };
+             context.SecondLanguages.AddOrUpdate(language_one);
+             context.SecondLanguages.AddOrUpdate(langue_two);
+             context.SaveChanges();
+            Seeds.FirstDemo.Teachers();
 
         }
     }

@@ -16,8 +16,8 @@ namespace LanguageProject.DAL
 
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
-        public DbSet<SecondLanguages> SecondLanguages { get; set; } 
-
+        public DbSet<LanguageSkill> SecondLanguages { get; set; } 
+        public DbSet<Course> Courses { get; set; }
         public DbSet<Languages> Languages { get; set; }
         //public DbSet<User>
     }
