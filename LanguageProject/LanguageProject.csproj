@@ -153,6 +153,7 @@
     <Content Include="Content\library\bootstrap.min.css" />
     <Content Include="Content\library\font-awesome.min.css" />
     <Content Include="Content\library\owl.carousel.css" />
+    <Content Include="Content\md-font.css" />
     <Content Include="Content\style.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\library\bootstrap.min.js" />
@@ -201,6 +202,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\mdfonts\md-font.woff" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

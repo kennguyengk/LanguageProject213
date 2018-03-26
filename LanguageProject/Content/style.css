@@ -495,15 +495,17 @@ h6,
   transition: all 0.3s linear 0s;
 }
 .mc-item {
-  position: relative;
+  
+ 
   background-color: #fff;
-  min-height: 330px;
+  position:relative;
+ 
 }
 .mc-item .image-heading {
   overflow: hidden;
 }
-.mc-item .image-heading img {
-  width: 100%;
+.mc-item .image-heading > img {
+  width:100%;
 }
 .mc-item .meta-categories {
   position: absolute;
@@ -551,8 +553,8 @@ h6,
   
   overflow: hidden;
 }
-.mc-item .image-author img {
-  width: 100%;
+.mc-item .image-author > img {
+  width:100%;
 }
 .mc-item .name-author {
   font-family: 'Raleway', sans-serif;

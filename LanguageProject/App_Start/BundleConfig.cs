@@ -12,7 +12,7 @@ namespace LanguageProject
             bundles.Add(new ScriptBundle("~/bundles/core-library").Include(
                      "~/Scripts/library/jquery-1.11.0.min.js",
                      "~/Scripts/library/bootstrap.min.js",
-                     "~/Scripts/library/jquery.owl.carousel.js",
+                     "~/Scripts/library/owl.carousel.js",
                      "~/Scripts/library/jquery.appear.min.js",
                      "~/Scripts/library/perfect-scrollbar.min.js"
             ));
@@ -24,8 +24,9 @@ namespace LanguageProject
             bundles.Add(new StyleBundle("~/Content/css").Include(
                     "~/Content/library/bootstrap.min.css",
                     "~/Content/library/font-awesome.min.css",
-                    "~/Content/library/owl.carousel.css.css",
-                    "~/Content/library/md-font.css",
+                    "~/Content/library/owl.carousel.css",
+                     "~/Content/library/owl.theme.default.css",
+                    "~/Content/md-font.css",
                     "~/Content/style.css"
 
             ));

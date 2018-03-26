@@ -6,7 +6,7 @@
         Learning();
         scrollStyle();
 
-        $(".feature-slider").owlCarousel({
+      /*  $(".feature-slider").owlCarousel({
             loop: true,
             autoPlay: 10000,
             items: 4,
@@ -18,6 +18,13 @@
             navigation: true,
             pagination: false,
             navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
+        });*/
+
+        $(".feature-slider").owlCarousel({
+            items: 4,
+            margin: 2,
+            autoWith:true
+            
         });
 
 
