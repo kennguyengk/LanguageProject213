@@ -33,8 +33,9 @@ namespace LanguageProject.Seeds
 
 
         }
-
-        public static List<Role> Roles() {
+       
+       // ApplicationRoleManager roleManager = new ApplicationRoleManager(dt);
+       /* public static List<Role> Roles() {
 
             List<Role> list = new List<Role> {
 
@@ -43,18 +44,14 @@ namespace LanguageProject.Seeds
                 new Role {Id = 3,Name = "Teacher" }
             };
             return list;
-        }
+        }*/
 
         public static List<User> Users() {
 
-            List<Role> roles = Roles();
+           // List<Role> roles = Roles();
             List<Languages> langagues = Lanuages();
            // Role admin = this:Roles.Item[1];
             
-            
-
-         
-
             //o.SecondLang.Add(language_one);
 
 
@@ -79,34 +76,35 @@ namespace LanguageProject.Seeds
             return courses;
 
         }
+        public static List<string> courseName = new List<string> {
+
+              "IELTS Focus",
+              "Academic Engish",
+              "TOEIC",
+              "IELTS Test Prep",
+              "IELTS Preparation"
+
+        };
 
         public static List<User> Teachers() {
+
             DAL.DataContext dt = new DAL.DataContext();
 
-            List<string> courseName = new List<string> {
-                "IELTS Focus",
-                "Academic Engish",
-                "TOEIC",
-                "IELTS Test Prep",
-                "IELTS Preparation"
-            };
-
-            List<int> costs = new List<int> { 10, 19, 20, 25, 22, 18, 10 };
-
+           
            
             List<User> teachers = new List<User> {
 
-             new User { FName = "Chris", LName = "Cook", Email = "chries22@gmail.com",AvatarPath="/images/user_avatar/chris22.jpg", Role = dt.Roles.Find(2), NativeLang = dt.Languages.Find(1), Balance = 0 },
-             new User { FName = "Mike", LName = "Warren", Email = "warrent2@gmail.com",AvatarPath="/images/user_avatar/mike22.jpg", Role = dt.Roles.Find(2), NativeLang = dt.Languages.Find(2), Balance = 0 },
-             new User { FName = "Florencia", LName = "Ferreira", Email = "ferrerirs2@gmail.com",AvatarPath="/images/user_avatar/floren22.jpg", Role = dt.Roles.Find(2), NativeLang = dt.Languages.Find(3), Balance = 0 },
-             new User { FName = "Sophie", LName = "Horrocks", Email = "sophie22@gmail.com",AvatarPath="/images/user_avatar/sophie.jpg", Role = dt.Roles.Find(2), NativeLang = dt.Languages.Find(3), Balance = 0 }
+             new User { FName = "Chris", LName = "Cook", UserName ="chries22@gmail.com",Email = "chries22@gmail.com",AvatarPath="/images/user_avatar/chris22.jpg", NativeLang = dt.Languages.Find(1), Balance = 0,Country="Canada"},
+             new User { FName = "Mike", LName = "Warren",UserName = "warrent2@gmail.com", Email = "warrent2@gmail.com",AvatarPath="/images/user_avatar/mike22.jpg", NativeLang = dt.Languages.Find(2), Balance = 0,Country="Canada" },
+             new User { FName = "Florencia", LName = "Ferreira",UserName="ferrerirs2@gmail.com", Email = "ferrerirs2@gmail.com",AvatarPath="/images/user_avatar/floren22.jpg", NativeLang = dt.Languages.Find(3), Balance = 0,Country="Canada" },
+             new User { FName = "Sophie", LName = "Horrocks",UserName="sophie22@gmail.com", Email = "sophie22@gmail.com",AvatarPath="/images/user_avatar/sophie.jpg", NativeLang = dt.Languages.Find(3), Balance = 0,Country="Canada" }
 
             };
-            Random rnd = new Random();
-            foreach (User te in teachers) {
+           
+            /*foreach (User te in teachers) {
 
-
-                //dt.Users.
+                te.Ad
+               
 
                 dt.Users.Add(te);
               
@@ -124,8 +122,8 @@ namespace LanguageProject.Seeds
               
 
 
-            }
-            dt.SaveChanges();
+            }*/
+            //dt.SaveChanges();
 
             return teachers;
         }

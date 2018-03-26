@@ -7,6 +7,10 @@ namespace LanguageProject.Migrations
     using LanguageProject.Models;
     using System.Collections.Generic;
 
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+
+
     internal sealed class Configuration : DbMigrationsConfiguration<LanguageProject.DAL.DataContext>
     {
         public Configuration()
@@ -16,14 +20,19 @@ namespace LanguageProject.Migrations
 
         protected override void Seed(LanguageProject.DAL.DataContext context)
         {
+            if (System.Diagnostics.Debugger.IsAttached == false) {
+                System.Diagnostics.Debugger.Launch();
+            }
+              
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
-            List<Languages> languages = Seeds.FirstDemo.Lanuages();
-            List<Role> roles = Seeds.FirstDemo.Roles();
-           
 
+            ApplicationRoleManager role = new ApplicationRoleManager(context);
+            role.CreateRoles();
+
+            List<Languages> languages = Seeds.FirstDemo.Lanuages();
             foreach (Languages la in languages) {
 
                 var old = context.Languages.Where(s => s.Name == la.Name).FirstOrDefault();
@@ -36,25 +45,77 @@ namespace LanguageProject.Migrations
             }
             context.SaveChanges();
 
-            foreach (Role rl in roles) {
+            
+           
+           
+            
+           
+            User one = new User { UserName= "paula@gmail.com", FName = "Paula", LName = "Caroline", Email = "paula@gmail.com", NativeLang = context.Languages.Find(4), Balance = 0,Country="Canada" };
+            User two = new User { UserName= "yumi@gmail.com", FName = "Debora", LName = "Mayumi", Email = "yumi@gmail.com", NativeLang = context.Languages.Find(5), Balance = 0,Country="Canada" };
 
-                var old = context.Roles.Where(s => s.Name == rl.Name).FirstOrDefault();
-                if (old == null)
+
+            ApplicationUserManager userManager = new ApplicationUserManager(new UserStore<User>(context));
+          
+            userManager.PasswordValidator = new PasswordValidator
+            {
+                    RequiredLength = 6,
+                    RequireNonLetterOrDigit = false,
+                    RequireDigit = false,
+                    RequireLowercase = false,
+                    RequireUppercase = false,
+            };
+            var create_one = userManager.Create(one, "123456");
+            if (create_one.Succeeded) {
+
+                userManager.AddToRole(one.Id, "Student");
+
+            }
+            var create_two = userManager.Create(two, "123456");
+
+            if (create_two.Succeeded) {
+
+                userManager.AddToRole(two.Id, "Student");
+
+            }
+            List<int> costs = new List<int> { 10, 19, 20, 25, 22, 18, 10 };
+
+            List<User> teachers = Seeds.FirstDemo.Teachers();
+
+            List<string> courseName = Seeds.FirstDemo.courseName;
+
+            Random rnd = new Random();
+        
+            foreach (User te in teachers)
+            {
+
+                var te_create = userManager.Create(te, "123456");
+                if (te_create.Succeeded)
                 {
-                    context.Roles.AddOrUpdate(rl);
+
+                    userManager.AddToRole(te.Id, "Student");
 
                 }
 
-            }
-           
-            context.SaveChanges();
-            Console.WriteLine("fadsfsa");
-           
-            User one = new User { FName = "Paula", LName = "Caroline", Email = "paula@gmail.com", Role = roles[1], NativeLang = context.Languages.Find(4), Balance = 0 };
-            User two = new User { FName = "Debora", LName = "Mayumi", Email = "yumi@gmail.com", Role = roles[1], NativeLang = context.Languages.Find(5), Balance = 0 };
+                for (int i = 0; i <= 5; i++)
+                {
 
-            context.Users.Add(one);
-            context.Users.Add(two);
+
+                    int r = rnd.Next(courseName.Count);
+                    int rCost = rnd.Next(costs.Count);
+                    Course course = new Course { Description = "", Language = context.Languages.Find(1), Title = courseName[rnd.Next(courseName.Count)], Cost = costs[rnd.Next(costs.Count)] };
+                    course.Teacher = te;
+                    context.Courses.Add(course);
+                    context.SaveChanges();
+
+                }
+
+
+
+            }
+
+
+            // context.Users.Add(one);
+            //context.Users.Add(two);
             //users.ForEach(s => context.Users.AddOrUpdate(s));
 
 
@@ -64,8 +125,8 @@ namespace LanguageProject.Migrations
              LanguageSkill langue_two = new LanguageSkill { Language = languages[4], User = two, Level = 8 };
              context.SecondLanguages.AddOrUpdate(language_one);
              context.SecondLanguages.AddOrUpdate(langue_two);
-             context.SaveChanges();
-            Seeds.FirstDemo.Teachers();
+            context.SaveChanges();
+          //  Seeds.FirstDemo.Teachers();
 
         }
     }

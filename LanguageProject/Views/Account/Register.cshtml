@@ -1,4 +1,8 @@
-﻿@{
+﻿
+@using LanguageProject.Models
+
+@model StudentRegisterViewModel
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
@@ -17,31 +21,42 @@
             <!-- FORM -->
             <div class="col-lg-4 pull-right">
                 <div class="form-login">
-                    <form>
-                        <h2 class="text-uppercase">sign up</h2>
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <h2 class="text-uppercase">Sign up</h2>
                         <div class="form-fullname">
-                            <input class="first-name" type="text" placeholder="First name">
-                            <input class="last-name" type="text" placeholder="Last name">
+                            @Html.TextBoxFor( m=>m.FName, new { @class = "first-name",@placeholder="First name"})
+                            @Html.TextBoxFor(m => m.LName, new { @class = "last-name", @placeholder = "Last name" })
+                           
                         </div>
-                        <div class="form-datebirth">
-                            <input type="text" placeholder="Date of Birth">
-                        </div>
+                        
                         <div class="form-email">
-                            <input type="text" placeholder="Email">
+                            @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email" })
+                            
+                        </div>
+                       
+                        <div class="form-password">
+                            @Html.PasswordFor(m => m.Password, new { @placeholder = "Password" })
+                          
                         </div>
                         <div class="form-password">
-                            <input type="password" placeholder="Password">
-                        </div>
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = "Confirm Password" })
 
+                        </div>
+                        
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
                         <div class="form-submit-1">
                             <input type="submit" value="Become a member" class="mc-btn btn-style-1">
                         </div>
                         <div class="link">
-                            <a href="login.html">
+                            <a href="@Url.Action("Login")">
                                 <i class="icon md-arrow-right"></i>Already have account ? Log in
                             </a>
                         </div>
-                    </form>
+
+                    }
+                    
                 </div>
             </div>
             <!-- END / FORM -->
