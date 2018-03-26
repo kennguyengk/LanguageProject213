@@ -6,12 +6,19 @@
 }
 
 <!-- Test push changes by lyrica-->
+<style>
+    .owl-dot,.owl-nav {
+
+        display:none!important;
+    }
+</style>
 
 <!-- HOME SLIDER -->
 <section class="slide" style="background-image: url(images/homeslider/bg.jpg)">
     <div class="container">
         <div class="slide-cn" id="slide-home">
             <!-- SLIDE ITEM -->
+           
             <div class="slide-item">
                 <div class="item-inner">
                     <div class="text">
@@ -32,24 +39,7 @@
             </div>
             <!-- SLIDE ITEM -->
             <!-- SLIDE ITEM -->
-            <div class="slide-item">
-                <div class="item-inner">
-                    <div class="text">
-                        <h2>Learn more - Earn more</h2>
-                        <p>
-                            this is not only an elegant theme but also<br> a course management system<br> for wordpress and drupal
-                        </p>
-                        <div class="group">
-                            <a href="#" class="mc-btn btn-style-1">See full features</a>
-                        </div>
-                    </div>
-
-                    <div class="img">
-                        <img src="images/homeslider/img-thumb.png" alt="">
-                    </div>
-
-                </div>
-            </div>
+            
             <!-- SLIDE ITEM -->
 
         </div>
@@ -187,50 +177,55 @@
             <h4 class="title-box text-uppercase">FEATURE COURSE</h4>
             <a href="categories.html" class="all-course mc-btn btn-style-1">View all</a>
             <div class="row">
-                <div class="feature-slider">
+                <div class="feature-slider1 clearfix">
+                    <div class="row">
+                        @foreach (Course course in (ViewBag.Courses as List<Course>))
+                        {
 
-                    @foreach (Course course in (ViewBag.Courses as List<Course>))
-                    {
-                    <div class="mc-item mc-item-1">
-                        <div class="image-heading">
-                            <img src="/images/feature/img-1.jpg" alt="">
-                        </div>
-                        <div class="meta-categories"><a href="#">@course.Language.Name</a></div>
-                        <div class="content-item">
-                            <div class="image-author">
-                                <img src="@course.Teacher.AvatarPath" alt="">
-                            </div>
-                            <h4><a href="course-intro.html">@course.Title</a></h4>
-                            <div class="name-author">
-                                 <a href="#">@course.Teacher.FName @course.Teacher.LName</a>
-                            </div>
-                        </div>
-                        <div class="ft-item">
-                            <div class="rating">
-                                <div class="rating">
-                                    <a href="#" class="active"></a>
-                                    <a href="#" class="active"></a>
-                                    <a href="#" class="active"></a>
-                                    <a href="#"></a>
-                                    <a href="#"></a>
+                            <div class="col-lg-3 col-sm-12" style="float:left">
+                                <div class="mc-item mc-item-1">
+                                    <div class="image-heading">
+                                        <img src="/images/feature/img-1.jpg" alt="">
+                                    </div>
+                                    <div class="meta-categories"><a href="#">@course.Language.Name</a></div>
+                                    <div class="content-item">
+                                        <div class="image-author">
+                                            <img src="@course.Teacher.AvatarPath" alt="">
+                                        </div>
+                                        <h4><a href="course-intro.html">@course.Title</a></h4>
+                                        <div class="name-author">
+                                            <a href="#">@course.Teacher.FName @course.Teacher.LName</a>
+                                        </div>
+                                    </div>
+                                    <div class="ft-item">
+                                        <div class="rating">
+                                            <div class="rating">
+                                                <a href="#" class="active"></a>
+                                                <a href="#" class="active"></a>
+                                                <a href="#" class="active"></a>
+                                                <a href="#"></a>
+                                                <a href="#"></a>
+                                            </div>
+                                        </div>
+                                        <div class="view-info">
+                                            <i class="icon md-users"></i>
+                                            2568
+                                        </div>
+                                        <div class="comment-info">
+                                            <i class="icon md-comment"></i>
+                                            25
+                                        </div>
+                                        <div class="price">
+                                            $@course.Cost
+                                            <span class="price-old"></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="view-info">
-                                <i class="icon md-users"></i>
-                                2568
-                            </div>
-                            <div class="comment-info">
-                                <i class="icon md-comment"></i>
-                                25
-                            </div>
-                            <div class="price">
-                                $@course.Cost
-                                <span class="price-old"></span>
-                            </div>
-                        </div>
+
+                        }
                     </div>
-                    }
-                        
+    
                     </div>
             </div>
         </div>
