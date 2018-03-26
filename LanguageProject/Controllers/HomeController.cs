@@ -11,6 +11,7 @@ namespace LanguageProject.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            
             DAL.DataContext dt = new DAL.DataContext();
             dt.Configuration.LazyLoadingEnabled = false;
             ViewBag.Courses = dt.Courses.Include("Teacher").Include("Language").OrderBy(r => Guid.NewGuid()).Take(8).ToList();
@@ -19,12 +20,7 @@ namespace LanguageProject.Controllers
         }
 
 
-        // Login
-
-        public ActionResult Login() {
-
-            return View();
-        }
+        
 
         // Register
         public ActionResult Registers() {
