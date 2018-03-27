@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="langexchangeDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Learners">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Age" Type="int" />
+          <Property Name="ProfilePicURL" Type="nvarchar(max)" />
+          <Property Name="SpeakLang1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SpeakLang2" Type="nvarchar" MaxLength="50" />
+          <Property Name="SpeakLang3" Type="nvarchar" MaxLength="50" />
+          <Property Name="LearnLang1" Type="nvarchar" MaxLength="50" />
+          <Property Name="LearnLang2" Type="nvarchar" MaxLength="50" />
+          <Property Name="LearnLang3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teachers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Age" Type="int" />
+          <Property Name="ProfilePicURL" Type="nvarchar(max)" />
+          <Property Name="SpeakLang1" Type="nvarchar" MaxLength="50" />
+          <Property Name="SpeakLang2" Type="nvarchar" MaxLength="50" />
+          <Property Name="SpeakLang3" Type="nvarchar" MaxLength="50" />
+          <Property Name="TeachLang1" Type="nvarchar" MaxLength="50" />
+          <Property Name="TeachLang2" Type="nvarchar" MaxLength="50" />
+          <Property Name="TeachLang3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="langexchangeDBModelStoreContainer">
+          <EntitySet Name="Learners" EntityType="Self.Learners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="langexchangeDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Learner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="ProfilePicURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SpeakLang1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SpeakLang2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SpeakLang3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LearnLang1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LearnLang2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LearnLang3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="ProfilePicURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SpeakLang1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SpeakLang2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SpeakLang3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TeachLang1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TeachLang2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TeachLang3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="langexchangeDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Learners" EntityType="Self.Learner" />
+          <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="langexchangeDBModelStoreContainer" CdmEntityContainer="langexchangeDBEntities">
+          <EntitySetMapping Name="Learners">
+            <EntityTypeMapping TypeName="langexchangeDBModel.Learner">
+              <MappingFragment StoreEntitySet="Learners">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="ProfilePicURL" ColumnName="ProfilePicURL" />
+                <ScalarProperty Name="SpeakLang1" ColumnName="SpeakLang1" />
+                <ScalarProperty Name="SpeakLang2" ColumnName="SpeakLang2" />
+                <ScalarProperty Name="SpeakLang3" ColumnName="SpeakLang3" />
+                <ScalarProperty Name="LearnLang1" ColumnName="LearnLang1" />
+                <ScalarProperty Name="LearnLang2" ColumnName="LearnLang2" />
+                <ScalarProperty Name="LearnLang3" ColumnName="LearnLang3" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="langexchangeDBModel.Teacher">
+              <MappingFragment StoreEntitySet="Teachers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="ProfilePicURL" ColumnName="ProfilePicURL" />
+                <ScalarProperty Name="SpeakLang1" ColumnName="SpeakLang1" />
+                <ScalarProperty Name="SpeakLang2" ColumnName="SpeakLang2" />
+                <ScalarProperty Name="SpeakLang3" ColumnName="SpeakLang3" />
+                <ScalarProperty Name="TeachLang1" ColumnName="TeachLang1" />
+                <ScalarProperty Name="TeachLang2" ColumnName="TeachLang2" />
+                <ScalarProperty Name="TeachLang3" ColumnName="TeachLang3" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
