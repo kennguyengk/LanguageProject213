@@ -2376,7 +2376,7 @@ blockquote cite:after {
   float: left;
   padding: 15px 10px;
 }
-.after-slider-content .course-keyword input {
+.after-slider-content .course-keyword input,select {
   background-color: #fff;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;

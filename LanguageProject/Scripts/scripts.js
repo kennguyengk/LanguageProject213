@@ -309,7 +309,10 @@
         scrollbar();
         $(window).on('load', function() {
             if ($('.content-bar').length > 0) {
-                var  currentPosition =$('.content-bar').find('.current').position().left;
+
+                var currentPosition = $('.content-bar').find('.current').position().left;
+
+                currentPosition = (typeof currentPosition != 'underfined' ? currentPosition : 0);
                 var  prevCurrentWidth =$('.content-bar').find('.current').prev().width();
                 setTimeout(function() {
                     $('.content-bar').animate({
@@ -321,6 +324,7 @@
     }
 
     function uploadFile() {
+
         $('.up-file').delegate('a', 'click', function(e) {
             e.preventDefault();
             $(this).siblings('input[type="file"]').trigger('click');

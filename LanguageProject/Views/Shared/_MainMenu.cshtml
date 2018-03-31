@@ -15,6 +15,7 @@
 
         @if (!Request.IsAuthenticated)
         {
+           
             <li><a href="@Url.Action("Login", "Account")">Login</a></li>
             <li><a href="@Url.Action("Register", "Account")">Sign up</a></li>
             <li><a href="/">Become a teacher</a></li>
@@ -22,8 +23,8 @@
         }
         else
         {
-
-            <li><a href="/">@User.Identity.Name</a></li>
+          
+            <li><a href="/">@User.Identity.GetUserName()</a></li>
 
         }
 
@@ -316,14 +317,15 @@
 
         <li class="list-item account">
             <div class="account-info item-click">
-                <img src="/images/team-13.jpg" alt="">
+                @Helpers.getAvatar();
+                
             </div>
             <div class="toggle-account toggle-list">
                 @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                 {
                 @Html.AntiForgeryToken()
                 <ul class="list-account">
-                    <li><a href="setting.html"><i class="icon md-config"></i>Setting</a></li>
+                    <li><a href="/account/setting"><i class="icon md-config"></i>Setting</a></li>
                     <li><a href="javascript:document.getElementById('logoutForm').submit()">Sign Out</a></li>
                 </ul>
                 }

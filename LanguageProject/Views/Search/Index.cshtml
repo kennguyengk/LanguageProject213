@@ -1,0 +1,99 @@
+﻿@using LanguageProject.Models;
+@{
+
+   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section id="after-slider" class="after-slider section">
+    <div class="awe-color bg-color-1"></div>
+    <div class="after-slider-bg-2"></div>
+    <div class="container">
+
+        <div class="after-slider-content tb">
+            <div class="inner tb-cell">
+            @using (Html.BeginForm("Index", "Search", FormMethod.Get, new { }))
+            {
+                <h4></h4>
+                <div class="course-keyword">
+                    <select name="language">
+                        @foreach (var lang in ViewBag.Languages)
+                        {
+                            <option value="@lang.Id">@lang.Name</option>
+                        }
+                    </select>
+
+                </div>
+                <div class="mc-select-wrap">
+                    <div class="mc-select">
+                        <select class="select" name="type" id="all-categories" style="z-index: 10; opacity: 0;">
+                            <option value="teacher" selected="">Teacher</option>
+                            <option value="Student">Language Partners</option>
+                        </select><i class="fa fa-angle-down"></i>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <input value="Search" class="mc-btn btn-style-1" style="background-color: #11538C;" type="submit">
+                </div>
+            }
+            </div>
+
+            <div class="tb-cell text-right">
+                
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="profile">
+    <div class="container">
+
+        <h3 class="md black">@ViewBag.Results.Count Result</h3>
+
+        @foreach (User user in ViewBag.Results)
+        {
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="avatar-acount">
+                        <div class="changes-avatar">
+                            <div class="img-acount">
+
+                                @if (user.AvatarPath != null)
+                                {
+                                    <img src="@user.AvatarPath" alt="">
+                                }
+                                else
+                                {
+                                    <img src="/images/user_avatar/no-name.jpg" alt="">
+                                }
+                                
+                            </div>
+                        </div>
+                        <div class="info-acount">
+                            <h3 class="md black">@user.FName @user.LName</h3>
+                            <p>@user.Quote</p>
+                            <div class="profile-email-address">
+                                <div class="profile-email">
+                                    <h5>Email</h5>
+                                    <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="53323d3d323e3c3f3f2a13363e323a3f7d303c3e">[email&#160;protected]</a></p>
+                                </div>
+                                <div class="profile-address">
+                                    <h5>Country</h5>
+                                    <p>@user.Country</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        }
+        
+</section>
+

@@ -1,0 +1,144 @@
+﻿@model LanguageProject.Models.UserSettingViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<section class="content-bar">
+    <div class="container">
+        <ul>
+            <li>
+                <a href="account-learning.html">
+                    <i class="icon md-book-1"></i>
+                    Learning
+                </a>
+            </li>
+            <li>
+                <a href="account-teaching.html">
+                    <i class="icon md-people"></i>
+                    Teaching
+                </a>
+            </li>
+            <li>
+                <a href="account-assignment.html">
+                    <i class="icon md-shopping"></i>
+                    Language skill
+                </a>
+            </li>
+            
+            <li>
+                <a href="account-inbox.html">
+                    <i class="icon md-email"></i>
+                    Inbox
+                </a>
+            </li>
+            <li>
+                <a href="/account/change-password">
+                   
+                     Change password
+                </a>
+            </li>
+            <li>
+
+            </li>
+            <li></li>
+        </ul>
+    </div>
+</section>
+
+ <!-- PROFILE -->
+
+<section class="profile">
+    <div class="container">
+        <h3 class="md black">Profile</h3>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="avatar-acount">
+                    @using(Html.BeginForm("Setting", "Account", FormMethod.Post, new { encType = "multipart/form-data"}))
+                    {
+
+                        <div class="changes-avatar">
+                            <div class="img-acount">
+
+                                @if(Model.AvatarPath != null)
+                                {
+                                    <img src="@Model.AvatarPath" alt="">
+
+                                }
+                                else
+                                {
+                                    <img src="/images/user_avatar/no-name.jpg" alt="">
+                                }
+
+                            </div>
+                            <div class="choses-file up-file">
+                                @Html.TextBoxFor(m => m.attachment, new { @type = "file" })
+                                <input type="hidden" name="new_file">
+                                <a href="" class="mc-btn btn-style-6">Changes image</a>
+                            </div>
+                        </div>
+                        <div class="info-acount">
+
+
+                            <textarea name="Quote">@Model.Quote</textarea>
+                            <div class="security">
+                                <div class="tittle-security">
+                                    
+                                   
+                                    <h5>Email</h5>
+                                    <input name="Email" type="text" value="@Model.Email" readonly>
+                                    <h5>First name</h5>
+                                    <input name="FName" type="text" value="@Model.FName" />
+                                    <h5>Last name</h5>
+                                    <input name="LName" type="text" value="@Model.LName" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-save">
+                            <input type="submit" value="Save changes" class="mc-btn btn-style-1">
+                        </div>
+
+                    }
+                  
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="social-connect">
+                    <h5>Social connect</h5>
+                    <ul>
+                        <li>
+                            <a href="#" class="twitter">
+                                <i class="icon md-twitter"></i>
+                                <p>https://www.facebook.com/</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="facebook">
+                                <i class="icon md-facebook-1"></i>
+                                <p>https://www.facebook.com/</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="gg-plus">
+                                <i class="icon md-google-plus"></i>
+                                <p>https://www.facebook.com/</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="printerest">
+                                <i class="icon md-pinterest-1"></i>
+                                <p>https://www.facebook.com/</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="add-link">
+                        <i class="icon md-plus"></i>
+                        <input type="text" placeholder="paste link here">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

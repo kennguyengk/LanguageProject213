@@ -51,7 +51,7 @@ namespace LanguageProject.Controllers
 
                 case SignInStatus.Success:
 
-                   /* Models.User curent_user = UserManager.Find(model.Email, model.Password);
+                    /*Models.User curent_user = UserManager.Find(model.Email, model.Password);
                     IList<string> roles = UserManager.GetRoles(curent_user.Id);
 
                     HttpCookie userCookie = CustomIdentity.Create(curent_user,roles);
@@ -89,6 +89,7 @@ namespace LanguageProject.Controllers
                 var result = await UserManager.CreateAsync(newUser, model.Password);
                 if (result.Succeeded) {
 
+                   
                     await SignInManager.SignInAsync(newUser, isPersistent: false, rememberBrowser: false);
                     await UserManager.AddToRoleAsync(newUser.Id, "Student");
                     return RedirectToAction("Index", "Home");
@@ -101,5 +102,58 @@ namespace LanguageProject.Controllers
             return View(model);
 
         }
+
+        // GET /account/setting
+        [HttpGet]
+        public ActionResult Setting() {
+
+            DAL.DataContext dt = new DAL.DataContext();
+
+            Models.User currentUser = dt.Users.Find(User.Identity.GetUserId());
+            Models.UserSettingViewModel model = new Models.UserSettingViewModel()
+            {
+                AvatarPath = currentUser.AvatarPath,
+                FName = currentUser.FName,
+                LName = currentUser.LName,
+                Quote = currentUser.Quote,
+                Email = currentUser.Email
+            };
+
+        ViewBag.User = currentUser;
+            return View(model);
+        }
+
+        // POST /account/setting
+        [HttpPost]
+        public ActionResult Setting(Models.UserSettingViewModel model) {
+
+            HttpPostedFileBase file = model.attachment;
+            DAL.DataContext dt = new DAL.DataContext();
+            Models.User currentUser = dt.Users.Find(User.Identity.GetUserId());
+
+            currentUser.Email = model.Email;
+            currentUser.FName = model.FName;
+            currentUser.Quote = model.Quote;
+            currentUser.LName = model.LName;
+            if (file != null) {
+
+                string pic = System.IO.Path.GetFileName(file.FileName);
+                string path = System.IO.Path.Combine(
+                                       Server.MapPath("~/Content/images/avatar_path"), pic);
+                // file is uploaded
+                file.SaveAs(path);
+
+                string new_path = "/Content/images/avatar_path/" + pic;
+                currentUser.AvatarPath = new_path;
+               
+            }
+            model.AvatarPath = currentUser.AvatarPath;
+            dt.SaveChanges();
+
+
+            return View(model);
+
+        }
+
     }
 }

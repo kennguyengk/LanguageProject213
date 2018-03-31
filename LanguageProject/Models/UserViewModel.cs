@@ -10,6 +10,26 @@ namespace LanguageProject.Models
     {
     }
 
+
+    public class UserSettingViewModel {
+
+
+
+        
+
+        public string AvatarPath { get; set; }
+
+        public string FName { get; set; }
+
+        public string LName { get; set; }
+
+        public string Email { get; set; }
+
+
+        public string Quote { get; set;}
+        public HttpPostedFileBase attachment { get; set; }
+
+    }
     public class LoginViewModel
     {
         [Required]

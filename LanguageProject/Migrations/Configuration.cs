@@ -39,6 +39,7 @@ namespace LanguageProject.Migrations
                 if (old == null)
                 {
                     context.Languages.AddOrUpdate(la);
+                    
 
                 }
 
