@@ -177,6 +177,7 @@
     <Content Include="Scripts\library\jquery.owl.carousel.js" />
     <Content Include="Scripts\library\perfect-scrollbar.min.js" />
     <Content Include="Scripts\scripts.js" />
+    <None Include="Views\Home\SearchTeacher.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

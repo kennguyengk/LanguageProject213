@@ -40,5 +40,11 @@ namespace LanguageProject.Controllers
         {
             return View();
         }
+
+        // SearchTeacher
+        public ActionResult SearchTeacher()
+        {
+            return View();
+        }
     }
 }
