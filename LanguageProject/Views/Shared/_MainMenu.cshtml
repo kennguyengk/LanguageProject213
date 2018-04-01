@@ -11,23 +11,28 @@
     <!-- MENU -->
     <ul class="menu">
 
-
+        <li><a href="@Url.Action("Index", "Search")">Search</a></li>
 
         @if (!Request.IsAuthenticated)
         {
            
             <li><a href="@Url.Action("Login", "Account")">Login</a></li>
+           
             <li><a href="@Url.Action("Register", "Account")">Sign up</a></li>
-            <li><a href="/">Become a teacher</a></li>
+            <li><a href="@Url.Action("Register", "Teacher")">Become a teacher</a></li>
 
         }
         else
         {
           
             <li><a href="/">@User.Identity.GetUserName()</a></li>
+            if(User.IsInRole("Admin"))
+            {
 
+                <li><a href="/admin/index">Admin Dashboard</a></li>
+            }
         }
-
+       
 
     </ul>
     

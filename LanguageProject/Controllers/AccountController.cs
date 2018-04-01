@@ -51,11 +51,7 @@ namespace LanguageProject.Controllers
 
                 case SignInStatus.Success:
 
-                    /*Models.User curent_user = UserManager.Find(model.Email, model.Password);
-                    IList<string> roles = UserManager.GetRoles(curent_user.Id);
-
-                    HttpCookie userCookie = CustomIdentity.Create(curent_user,roles);
-                    Response.Cookies.Add(userCookie);*/
+                    
                     return RedirectToLocal(returnUrl);
 
                 case SignInStatus.Failure:

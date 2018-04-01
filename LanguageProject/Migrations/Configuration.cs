@@ -54,7 +54,7 @@ namespace LanguageProject.Migrations
             User one = new User { UserName= "paula@gmail.com", FName = "Paula", LName = "Caroline", Email = "paula@gmail.com", NativeLang = context.Languages.Find(4), Balance = 0,Country="Canada" };
             User two = new User { UserName= "yumi@gmail.com", FName = "Debora", LName = "Mayumi", Email = "yumi@gmail.com", NativeLang = context.Languages.Find(5), Balance = 0,Country="Canada" };
 
-
+            User admin = new User { UserName = "admin@gmail.com", FName = "Debora", LName = "Mayumi", Email = "admin@gmail.com", NativeLang = context.Languages.Find(5), Balance = 0, Country = "Canada" };
             ApplicationUserManager userManager = new ApplicationUserManager(new UserStore<User>(context));
           
             userManager.PasswordValidator = new PasswordValidator
@@ -76,6 +76,14 @@ namespace LanguageProject.Migrations
             if (create_two.Succeeded) {
 
                 userManager.AddToRole(two.Id, "Student");
+
+            }
+            var create_admin = userManager.Create(admin, "123456");
+
+            if (create_two.Succeeded)
+            {
+
+                userManager.AddToRole(two.Id, "Admin");
 
             }
             List<int> costs = new List<int> { 10, 19, 20, 25, 22, 18, 10 };

@@ -1,0 +1,120 @@
+﻿@using LanguageProject.Models
+
+@model StudentRegisterViewModel
+
+@{
+
+    var courses = ViewBag.Courses;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section id="featured-request-teacher" class="featured-request-teacher">
+    <div class="awe-parallax bg-featured-request-teacher"></div>
+    <div class="awe-overlay overlay-color-1"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="request-form">
+                    <h2>Become a teacher on Langexchange</h2>
+                    @using (Html.BeginForm("Register", "Teacher", FormMethod.Post, new { }))
+                    {
+
+                        @Html.AntiForgeryToken()
+                       
+                       
+                        <div class="form-yourname">
+                            @Html.TextBoxFor(m => m.FName, new { @class = "first-name", @placeholder = "First name" })
+                          
+                        </div>
+                        <div class="form-yourname">
+                            @Html.TextBoxFor(m => m.LName, new { @class = "last-name", @placeholder = "Last name" })
+                         
+                        </div>
+                        <div class="form-email">
+                            @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email" })
+
+                        </div>
+                        <div class="form-password">
+                            @Html.PasswordFor(m => m.Password, new { @placeholder = "Password" })
+
+                        </div>
+                        <div class="form-password">
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = "Confirm Password" })
+
+                        </div>
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <div class="form-submit-1">
+                            <input type="submit" value="Send request" class="mc-btn btn-style-1">
+                        </div>
+                    }
+                    
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <div class="request-featured">
+                    <h1 class="big">Why you should be our teacher ?</h1>
+
+                    <div class="row">
+                        <!-- FEATURED ITEM -->
+                        <div class="col-md-6">
+                            <div class="featured-item">
+                                <i class="icon icon-featured-1"></i>
+                                <h4 class="title-box text-uppercase">CLEAN AND EASY</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam  tincidunt ut laoreet</p>
+                            </div>
+                        </div>
+                        <!-- END / FEATURED ITEM -->
+                        <!-- FEATURED ITEM -->
+                        <div class="col-md-6">
+                            <div class="featured-item">
+                                <i class="icon icon-featured-2"></i>
+                                <h4 class="title-box text-uppercase">TEACH AS YOU CAN</h4>
+                                <p> Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit</p>
+                            </div>
+                        </div>
+                        <!-- END / FEATURED ITEM -->
+                        <!-- FEATURED ITEM -->
+                        <div class="col-md-6">
+                            <div class="featured-item">
+                                <i class="icon icon-featured-3"></i>
+                                <h4 class="title-box text-uppercase">COMMUNITY SUPPORT</h4>
+                                <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat</p>
+                            </div>
+                        </div>
+                        <!-- END / FEATURED ITEM -->
+                        <!-- FEATURED ITEM -->
+                        <div class="col-md-6">
+                            <div class="featured-item">
+                                <i class="icon icon-featured-4"></i>
+                                <h4 class="title-box text-uppercase">TRACKING PERFORMANCE</h4>
+                                <p> Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit</p>
+                            </div>
+                        </div>
+                        <!-- END / FEATURED ITEM -->
+                    </div>
+
+                    <div class="second-featured">
+                        <div class="mc-count-item">
+                            <h4>Courses</h4>
+                            <p><span class="countup">2536,556</span></p>
+                        </div>
+                        <div class="mc-count-item">
+                            <h4>Teachers</h4>
+                            <p><span class="countup">10,389</span></p>
+                        </div>
+                        <div class="mc-count-item">
+                            <h4>Students</h4>
+                            <p><span class="countup">34,177</span></p>
+                        </div>
+                        <div class="mc-count-item">
+                            <h4>Tuition Paid</h4>
+                            <p>$ <span class="countup">793,361,890</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
