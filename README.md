@@ -30,6 +30,12 @@ Contribute
 - Issue Tracker: https://github.com/kennguyengk/LanguageProject213/issues
 - Source Code: https://github.com/kennguyengk/LanguageProject213
 
+Built with
+
+- [MVC ASP](https://msdn.microsoft.com/en-us/library/dd381412(v=vs.108).aspx)
+- [MSSQL](https://www.microsoft.com/en-us/sql-server/sql-server-2016)
+- [Bootstrap 3](https://getbootstrap.com/docs/3.3/css/)
+
 Support
 -------
 
