@@ -34,7 +34,7 @@ Support
 -------
 
 If you are having issues, please let us know.
-We use google hangout
+We use google hangout <br/>
 https://www.google.com/url?q=https://hangouts.google.com/hangouts/_/calendar/aGFvLmxhYy5hdC5jZW50ZW5uaWFsQGdtYWlsLmNvbQ.1n1bcql57ompag4huv9qqr35jo&sa=D&source=hangouts&ust=1522718525211000&usg=AFQjCNHTSIAHlXEc6EOGeNLK2fdIg9Aebg
 
 
