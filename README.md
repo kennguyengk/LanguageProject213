@@ -22,7 +22,7 @@ Install Language_project by running:
 
 Using migration to add tables and some demo users to mssql server:
    - Edit connection string with info of your own local mssql server.
-   - Run update-database command in nuget console
+   - Run ```update-database``` command in nuget console
 
 Contribute
 ----------
