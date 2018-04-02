@@ -1,14 +1,14 @@
 Language project
 ========
 
-a website where user can make friend and share the interests in languages
+A web application where user can make friend and share the interests in language
 
 
 Features
 --------
 
 - Register as student
-- Resgiter as teacher
+- Register as teacher
 - Search for language partners
 - Search for tutors
 - Teaching online
