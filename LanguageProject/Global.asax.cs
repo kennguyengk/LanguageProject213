@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Optimization;
 using System.Web.Security;
+using System.Web.Http;
 
 namespace LanguageProject
 {
@@ -13,11 +14,12 @@ namespace LanguageProject
     {
         protected void Application_Start()
         {
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            
-
+          //  WebApiConfig.Register(GlobalConfiguration.Configuration);
+           
         }
     }
 }

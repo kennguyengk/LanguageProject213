@@ -1,0 +1,119 @@
+﻿@using LanguageProject.Models;
+@model LanguageProject.Models.UserSettingViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .owner .author {
+        float: right !important;
+    }
+
+    .owner .image {
+        margin-right: 0px !important;
+    }
+</style>
+@Html.Partial("~/Views/Shared/_UserBar.cshtml")
+
+<section id="course-concern" class="course-concern">
+    <div class="container">
+
+        <div class="message-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="message-sb">
+                        <div class="message-sb-title">
+                            <h4>Inbox</h4>
+                            <a href="#" class="new-message"><i class="icon md-plus"></i>New message</a>
+                        </div>
+                        <div class="list-wrap ps-container ps-active-y">
+                            <ul class="list-message">
+                                <!-- LIST ITEM -->
+                                @foreach (ChatSession cs in Model.ChatSessions)
+                                {
+
+
+                                    <li class="ac-new @(cs.Id == ViewBag.SessionId ? "active":"")">
+                                        <a href="/Account/MailBox/@cs.Id">
+                                            <div class="image">
+                                                <img src="@(cs.Owner(Model.UserId) ? cs.Receive.AvatarPath: cs.Sender.AvatarPath)" alt="">
+                                            </div>
+                                            <div class="list-body">
+                                                <div class="author">
+                                                    <span>@(cs.Owner(Model.UserId) ? cs.Receive.FName : cs.Sender.FName) @(cs.Owner(Model.UserId) ? cs.Receive.LName : cs.Sender.LName) </span>
+                                                    <div class="div-x"></div>
+                                                </div>
+                                                <p></p>
+                                                <div class="time">
+                                                    <span></span>
+                                                </div>
+                                                <div class="indicator">
+
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+
+
+                                }
+
+
+
+                            </ul><div class="ps-scrollbar-x-rail" style="width: 366px; display: none; left: 0px;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; height: 440px; display: inherit; right: 0px;"><div class="ps-scrollbar-y" style="top: 0px; height: 150px;"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+
+
+                    @foreach (Message mess in ViewBag.MyMess)
+                    {
+                        <div class="row">
+                            <div class="col-md-12 @(mess.SenderID == Model.UserId ? "":"owner")">
+                                <div class="message-ct">
+                                    <div class="author">
+                                        <div class="image">
+                                            <img src="@mess.Sender.AvatarPath" alt="">
+                                        </div>
+
+                                    </div>
+
+                                    <span class="author-name" style="color:#37abf2;padding-left:15px">@mess.Sender.FName @mess.Sender.LName</span>
+                                    <em>@mess.when</em>
+                                    <p style="background-color: #f4f4f4;margin-top:5px;padding-left: 15px;color:black">@mess.Content</p>
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="message-ct">
+                                @using (Html.BeginForm("SaveChat", "Account", FormMethod.Post, new { }))
+                                {
+                                    <input type="hidden" name="SessionId" value="@ViewBag.SessionId" />
+                                    <div class="text-form-editor">
+                                        <img src="images/editor-demo-1.jpg" alt="">
+                                        <textarea name="Content" placeholder="Discussion content"></textarea>
+                                    </div>
+                                    <div class="form-action">
+                                        <input type="submit" value="Send message" class="send mc-btn-3 btn-style-1">
+                                    </div>
+                                }
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

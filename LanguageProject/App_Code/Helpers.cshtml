@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNet.Identity;
+
+@helper HelperName(string name) {
+    // your helper can contain code and/or markup, e.g.
+    // var msg = "Hello " + name;
+    // <p>@msg</p>
+    // For more information, visit http://go.microsoft.com/fwlink/?LinkID=204658
+}
+
+@helper getAvatar() { 
+
+    
+
+LanguageProject.DAL.DataContext dt = new LanguageProject.DAL.DataContext();
+LanguageProject.Models.User currentUser = dt.Users.Find(User.Identity.GetUserId());
+if (currentUser != null && currentUser.AvatarPath != null)
+{
+
+        <img src="@currentUser.AvatarPath" alt="">
+
+}
+else
+{
+
+        <img src="/images/user_avatar/no-name.jpg" alt="">
+}
+
+
+}

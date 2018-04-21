@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using LanguageProject.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations;
 
 namespace LanguageProject.DAL
 {
@@ -26,5 +27,12 @@ namespace LanguageProject.DAL
         public DbSet<Course> Courses { get; set; }
         public DbSet<Languages> Languages { get; set; }
         //public DbSet<User>
+
+
+        public DbSet<Message> Messages { get; set; }
+     
+        public DbSet<CourseSession> CourseSessions { get; set; }
+
+        public DbSet<ChatSession> ChatSessions { get; set; }
     }
 }

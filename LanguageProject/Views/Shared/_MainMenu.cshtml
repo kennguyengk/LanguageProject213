@@ -11,22 +11,28 @@
     <!-- MENU -->
     <ul class="menu">
 
-
+        <li><a href="@Url.Action("Index", "Search")">Search</a></li>
 
         @if (!Request.IsAuthenticated)
         {
+           
             <li><a href="@Url.Action("Login", "Account")">Login</a></li>
+           
             <li><a href="@Url.Action("Register", "Account")">Sign up</a></li>
-            <li><a href="/">Become a teacher</a></li>
+            <li><a href="@Url.Action("Register", "Teacher")">Become a teacher</a></li>
 
         }
         else
         {
+          
+            <li><a href="/">@User.Identity.GetUserName()</a></li>
+            if(User.IsInRole("Admin"))
+            {
 
-            <li><a href="/">@User.Identity.Name</a></li>
-
+                <li><a href="/admin/index">Admin Dashboard</a></li>
+            }
         }
-
+       
 
     </ul>
     
@@ -42,8 +48,10 @@
         <!-- MESSAGE INFO -->
         <li class="list-item messages">
             <div class="message-info item-click">
-                <i class="icon md-email"></i>
-                <span class="itemnew"></span>
+                <a href="/Account/MailBox/0">
+                    <i class="icon md-email"></i>
+                    <span class="itemnew"></span>
+                </a>
             </div>
             <div class="toggle-message toggle-list">
                 <div class="list-profile-title">
@@ -316,14 +324,15 @@
 
         <li class="list-item account">
             <div class="account-info item-click">
-                <img src="/images/team-13.jpg" alt="">
+                @Helpers.getAvatar();
+                
             </div>
             <div class="toggle-account toggle-list">
                 @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                 {
                 @Html.AntiForgeryToken()
                 <ul class="list-account">
-                    <li><a href="setting.html"><i class="icon md-config"></i>Setting</a></li>
+                    <li><a href="/account/setting"><i class="icon md-config"></i>Setting</a></li>
                     <li><a href="javascript:document.getElementById('logoutForm').submit()">Sign Out</a></li>
                 </ul>
                 }

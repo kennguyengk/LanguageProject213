@@ -1,0 +1,114 @@
+﻿@using LanguageProject.Models;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@Html.Partial("~/Views/Shared/_UserBar.cshtml")
+
+<!-- PROFILE -->
+
+<section class="profile">
+    <div class="container">
+        <h3 class="md black">Language</h3>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="avatar-acount">
+                    <table class="table">
+                        <thead>
+                            <tr>
+
+                                <th>#</th>
+                                <th>Language</th>
+                                <th>Level</th>
+                                <th></th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            @foreach (LanguageSkill lang in ViewBag.Langs)
+                            {
+
+                                <tr>
+                                    <td></td>
+                                    <td><a style="margin-top:0px" class="mc-btn btn-style-1">@lang.Language.Name</a></td>
+                                    <td>@lang.Level</td>
+                                    <td>
+                                        <div class="remove">
+                                            <a href="#"><i class="icon md-close-2"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                @using (Html.BeginForm("SaveLanguage", "Account"))
+                                {
+                                    <td>Add</td>
+                                    <td>
+
+                                        <select name="lang">
+                                            @foreach (Languages all in ViewBag.AllLangs)
+                                            {
+                                                <option value="@all.Id">@all.Name</option>
+                                            }
+
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="level">
+                                            @for (int n = 1; n <= 9; n++)
+                                            {
+                                                <option value="@n">@n</option>
+                                            }
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="submit" class="mc-btn-3 btn-style-1 popup-with-zoom-anim" value="Add" />
+
+                                    </td>
+                                }
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="social-connect">
+                    <h5>Social connect</h5>
+                    <ul>
+                        <li>
+                            <a href="#" class="twitter">
+                                <i class="icon md-twitter"></i>
+                                <p>https://www.facebook.com/</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="facebook">
+                                <i class="icon md-facebook-1"></i>
+                                <p>https://www.facebook.com/</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="gg-plus">
+                                <i class="icon md-google-plus"></i>
+                                <p>https://www.facebook.com/</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="printerest">
+                                <i class="icon md-pinterest-1"></i>
+                                <p>https://www.facebook.com/</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="add-link">
+                        <i class="icon md-plus"></i>
+                        <input type="text" placeholder="paste link here">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

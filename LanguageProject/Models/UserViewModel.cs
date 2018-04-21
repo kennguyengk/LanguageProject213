@@ -9,7 +9,77 @@ namespace LanguageProject.Models
     public class UserViewModel
     {
     }
+    public class BalanceViewModel {
 
+
+        public int Amount { get; set; }
+
+    }
+
+    public class UserSaveCourse {
+
+        public int CourseId { get; set; }
+        public string MyTime { get; set; }
+
+
+    }
+
+    public class TeacherChangeCourse
+    {
+
+        public int SeId { get; set; }
+        public string SeStatus { get; set; }
+
+    }
+
+    public class CourseViewModel {
+
+        public string Title { get; set; }
+        public string Des { get; set; }
+        public int Cost { get; set; }
+
+    }
+    public class UserSendMessModel {
+
+        public string Send { get; set; }
+        public string Content { get; set; }
+
+    }
+
+    
+    public class UserSettingViewModel {
+
+
+
+        public string UserId { get; set; }
+
+        public string AvatarPath { get; set; }
+
+        public string FName { get; set; }
+
+        public string LName { get; set; }
+
+        public string Email { get; set; }
+
+        public int Balance { get; set; }
+
+        public string Quote { get; set;}
+
+        public List<Message> Messages { get; set; }
+        public HttpPostedFileBase attachment { get; set; }
+
+        public List<ChatSession> ChatSessions { get; set; }
+
+        public ChatBoxSend ChatBox { get; set; }
+
+    }
+
+    public class ChatBoxSend {
+
+        public string ReceiveId { get; set; }
+        public int SessionId { get; set; }
+        public string Content { get; set; }
+    }
     public class LoginViewModel
     {
         [Required]
