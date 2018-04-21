@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Threading.Tasks;
+using LanguageProject.Models;
+using Microsoft.AspNet.Identity;
 
 namespace LanguageProject.Controllers
 {
@@ -15,7 +17,28 @@ namespace LanguageProject.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult TeacherSchedule()
+        {
 
+            DAL.DataContext dt = new DAL.DataContext();
+
+            User current = dt.Users.Find(User.Identity.GetUserId());
+            string current_id = User.Identity.GetUserId();
+            List<CourseSession> cs = dt.CourseSessions.Include("Teacher").Include("Student").Where(c => c.Teacher.Id == current_id).ToList();
+            ViewBag.Courses = cs;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangeStatus(TeacherChangeCourse cs) {
+
+            DAL.DataContext dt = new DAL.DataContext();
+            CourseSession myCs = dt.CourseSessions.Where(c => c.Id == cs.SeId).FirstOrDefault();
+            myCs.Status = "Accepted";
+            dt.SaveChanges();
+            return RedirectToAction("TeacherSchedule", "Account");
+        }
 
         public ActionResult Register() {
 

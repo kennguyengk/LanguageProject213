@@ -42,7 +42,7 @@ fbq('track', "PageView");</script>
                 <!-- LOGO -->
                 <div class="logo"><a href="index.html"><img src="images/logo.png" alt=""></a></div>
                 <!-- END / LOGO -->
-        @Html.Partial("_MainMenu")  
+                @Html.Partial("_MainMenu")
 
             </div>
         </header>
@@ -56,9 +56,9 @@ fbq('track', "PageView");</script>
 
     @Scripts.Render("~/bundles/core-library")
     @Scripts.Render("~/bundles/main-script")
-    
+    @RenderSection("CustomScript", required: false)
     <script>
-   
+
     </script>
 </body>
 </html>

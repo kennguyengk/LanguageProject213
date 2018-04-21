@@ -1,0 +1,78 @@
+﻿@using LanguageProject.Models;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("~/Views/Shared/_UserBar.cshtml")
+<section id="quizz-intro-section" class="quizz-intro-section learn-section" style="min-height: 332px;padding-top:0px">
+    <div class="container">
+
+        <div class="title-ct">
+            <h3><strong></strong></h3>
+        </div>
+
+        <div class="table-student-submission">
+            <table class="mc-table">
+                <thead>
+                    <tr>
+                        <th class="submissions">#</th>
+                        <th class="author">Course <span class="caret"></span></th>
+                        <th class="score">Student <span class="caret"></span></th>
+                        <th></th>
+                        <th class="submit-date">Submit date <span class="caret"></span></th>
+                        <th>Fee</th>
+                        <th class="">Status</th>
+
+
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (CourseSession cs in ViewBag.Courses)
+                    {
+
+                        <form action="@Url.Action("ChangeStatus","Teacher")" method="post">
+                            <input type="hidden" name="SeId" value="@cs.Id" />
+                            <input type="hidden" name="SeStatus" value="@cs.Status" />
+                            <tr class="new">
+                                <td>@cs.Id</td>
+                                <td class="submissions">@cs.Course.Title</td>
+                                <td class="author">@cs.Student.FName</td>
+                                <th><img style="width:30px" src="@cs.Student.AvatarPath" /></th>
+                                <td class="score">@cs.When</td>
+                                <td class="submit-date">@cs.Course.Cost $</td>
+                                <td>
+                                    @switch (cs.Status)
+                                    {
+
+                                        case "Waiting Accept":
+                                            <input class="btn btn-primary" type="submit" value="@cs.Status" ? />
+                                            break;
+                                        case "Accepted":
+                                            <button class="btn btn-info">Ongoing</button>
+                                            break;
+
+                                    }
+
+                                </td>
+                            </tr>
+                        </form>
+                    }
+
+
+
+
+
+
+
+
+
+
+
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</section>

@@ -68,22 +68,22 @@ namespace LanguageProject.Migrations
             var create_one = userManager.Create(one, "123456");
             if (create_one.Succeeded) {
 
-                userManager.AddToRole(one.Id, "Student");
+                userManager.AddToRole(one.Id, "Teacher");
 
             }
             var create_two = userManager.Create(two, "123456");
 
             if (create_two.Succeeded) {
 
-                userManager.AddToRole(two.Id, "Student");
+                userManager.AddToRole(two.Id, "Teacher");
 
             }
             var create_admin = userManager.Create(admin, "123456");
 
-            if (create_two.Succeeded)
+            if (create_admin.Succeeded)
             {
 
-                userManager.AddToRole(two.Id, "Admin");
+                userManager.AddToRole(admin.Id, "Admin");
 
             }
             List<int> costs = new List<int> { 10, 19, 20, 25, 22, 18, 10 };

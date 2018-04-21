@@ -1,0 +1,108 @@
+﻿@using LanguageProject.Models;
+@model LanguageProject.Models.BalanceViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+}
+
+@Html.Partial("~/Views/Shared/_UserBar.cshtml")
+<section class="profile">
+    <div class="container">
+        <h3 class="md black">Your Balance: @Model.Amount $</h3>
+        <div class="row">
+            <div class="col-md-9">
+
+
+                <div class="row avatar-acount">
+
+                    <div class="col-xs-12 col-md-6">
+                        <div class="panel panel-default">
+
+                            <div class="panel-body">
+                                <form role="form" id="my-card" method="post" action="@Url.Action("SaveBalance","Account")">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label>CARD NUMBER</label>
+                                                <div class="input-group">
+                                                    <input placeholder="Card number" type="tel" class="form-control" name="number" />
+                                                    <span class="input-group-addon"><span class="fa fa-credit-card"></span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-7 col-md-7">
+                                            <div class="form-group">
+                                                <label><span class="hidden-xs">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
+                                                <input type="tel" class="form-control" placeholder="MM/YY" name="expiry" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-5 col-md-5 pull-right">
+                                            <div class="form-group">
+                                                <label>CV CODE</label>
+                                                <input type="tel" class="form-control" name="cvc" placeholder="CVC" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label>CARD OWNER</label>
+                                                <input type="text" class="form-control" name="name" placeholder="Full name" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label>Amount</label>
+                                                <select name="amount" class="form-control">
+                                                    <option value="10">10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="50">50</option>
+                                                    <option value="100">100</option>
+                                                    <option value="200">200</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                            </div>
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <input type="submit" class="btn btn-primary  btn-lg btn-block" value="Process payment" />
+
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-wrapper"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section CustomScript{
+    <script src="~/Scripts/jquery.card.js"></script>
+    <script>
+
+
+        $('#my-card').card({
+            // a selector or DOM element for the container
+            // where you want the card to appear
+            container: '.card-wrapper', // *required*
+
+            // all of the other options from above
+        });
+
+    </script>
+
+
+}
+

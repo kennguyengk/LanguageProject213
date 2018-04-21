@@ -6,37 +6,37 @@
         Learning();
         scrollStyle();
 
-      /*  $(".feature-slider").owlCarousel({
-            loop: true,
-            autoPlay: 10000,
-            items: 4,
-            itemsDesktop : [1199,4],
-            itemsDesktopSmall : [979,3],
-            itemsTablet: [768,2],
-            itemsTabletSmall: [600,1],
-            slideSpeed: 300,
-            navigation: true,
-            pagination: false,
-            navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
-        });*/
+        /*  $(".feature-slider").owlCarousel({
+              loop: true,
+              autoPlay: 10000,
+              items: 4,
+              itemsDesktop : [1199,4],
+              itemsDesktopSmall : [979,3],
+              itemsTablet: [768,2],
+              itemsTabletSmall: [600,1],
+              slideSpeed: 300,
+              navigation: true,
+              pagination: false,
+              navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
+          });*/
 
         $(".feature-slider").owlCarousel({
             items: 4,
             margin: 2,
-            autoWith:true
-            
+            autoWith: true
+
         });
 
 
 
-        $('.view-grid').on('click', function() {
+        $('.view-grid').on('click', function () {
             $('.categories-content .content').attr('class', 'content grid');
             $('.grid').addClass('fade-1');
             $('.list').removeClass('fade-2');
             $(this).addClass('active');
             $('.view-list').removeClass('active');
         });
-        $('.view-list').on('click', function() {
+        $('.view-list').on('click', function () {
             $('.categories-content .content').attr('class', 'content list');
             $('.list').addClass('fade-2');
             $('.grid').removeClass('fade-1');
@@ -50,14 +50,14 @@
         ==============================*/
 
         var $toggleList = $('.list-account-info .list-item .toggle-list');
-        $('html').on('click', function() {
+        $('html').on('click', function () {
             $toggleList.stop().removeClass('toggle-message-add');
             $('.list-account-info .item-click').stop().removeClass('active-ac');
         });
-        $('.list-account-info .list-item').on('click', function(event) {
+        $('.list-account-info .list-item').on('click', function (event) {
             event.stopPropagation();
         });
-        $('.list-account-info .item-click').on('click', function(event) {
+        $('.list-account-info .item-click').on('click', function (event) {
             if ($(this).hasClass('active-ac') == false) {
                 $('.list-account-info .item-click').removeClass('active-ac');
                 $toggleList.stop().removeClass('toggle-message-add');
@@ -66,15 +66,15 @@
             $(this).siblings('.toggle-list')
                 .stop()
                 .toggleClass('toggle-message-add');
-            
+
         });
 
-        $.each($('.content-bar'), function() {
+        $.each($('.content-bar'), function () {
             var widthList = $(this).find('li').outerWidth(),
                 totalList = $(this).find('li').length;
             $(this).find('ul').width(widthList * totalList + 20);
         });
-        
+
 
         /*==============================
             PROGRESS BAR
@@ -84,6 +84,10 @@
             var percent = $('.current-progress .count').text();
             $('.progress-run-add').width(percent);
         });
+
+
+      
+
 
 
         /*==============================

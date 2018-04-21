@@ -1,11 +1,11 @@
 ﻿@using LanguageProject.Models;
 @{
 
-   
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+<link rel="stylesheet" href="~/Content/bootstrap-datetimepicker.css">
 <section id="after-slider" class="after-slider section">
     <div class="awe-color bg-color-1"></div>
     <div class="after-slider-bg-2"></div>
@@ -13,35 +13,45 @@
 
         <div class="after-slider-content tb">
             <div class="inner tb-cell">
-            @using (Html.BeginForm("Index", "Search", FormMethod.Get, new { }))
-            {
-                <h4></h4>
-                <div class="course-keyword">
-                    <select name="language">
-                        @foreach (var lang in ViewBag.Languages)
-                        {
-                            <option value="@lang.Id">@lang.Name</option>
-                        }
-                    </select>
+                @using (Html.BeginForm("Index", "Search", FormMethod.Get, new { }))
+                {
+                    <h4></h4>
+                    <div class="course-keyword">
+                        <select name="language">
+                            @foreach (var lang in ViewBag.Languages)
+                            {
+                                if (ViewBag.LangId == lang.Id)
+                                {
+                                    <option value="@lang.Id" selected>@lang.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@lang.Id">@lang.Name</option>
+                                }
 
-                </div>
-                <div class="mc-select-wrap">
-                    <div class="mc-select">
-                        <select class="select" name="type" id="all-categories" style="z-index: 10; opacity: 0;">
-                            <option value="teacher" selected="">Teacher</option>
-                            <option value="Student">Language Partners</option>
-                        </select><i class="fa fa-angle-down"></i>
+                            }
+                        </select>
+
                     </div>
-                </div>
+                    <div class="mc-select-wrap">
+                        <div class="mc-select">
+                            <select class="select" name="type" id="all-categories" style="z-index: 10; opacity: 0;">
 
-                <div class="form-actions">
-                    <input value="Search" class="mc-btn btn-style-1" style="background-color: #11538C;" type="submit">
-                </div>
-            }
+
+                                <option value="teacher" @(ViewBag.Type == "teacher" ? "Selected" : "")>Teacher</option>
+                                <option value="Student" @(ViewBag.Type == "Student" ? "Selected" : "")>Language Partners</option>
+                            </select><i class="fa fa-angle-down"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <input value="Search" class="mc-btn btn-style-1" style="background-color: #11538C;" type="submit">
+                    </div>
+                }
             </div>
 
             <div class="tb-cell text-right">
-                
+
             </div>
         </div>
 
@@ -69,17 +79,36 @@
                                 {
                                     <img src="/images/user_avatar/no-name.jpg" alt="">
                                 }
-                                
+
                             </div>
                         </div>
                         <div class="info-acount">
                             <h3 class="md black">@user.FName @user.LName</h3>
                             <p>@user.Quote</p>
                             <div class="profile-email-address">
-                                <div class="profile-email">
-                                    <h5>Email</h5>
-                                    <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="53323d3d323e3c3f3f2a13363e323a3f7d303c3e">[email&#160;protected]</a></p>
+                                <div>
+                                    Speaking:
+                                    @foreach (LanguageSkill lang in user.SecondLang)
+                                    {
+
+                                        @String.Format(" {0} ", lang.Language.Name)
+
+                                    }
+
                                 </div>
+                                @if (Request.IsAuthenticated)
+                                {
+
+                                    <div class="profile-email">
+                                        <button type="button" class="send mc-btn-3 btn-style-1" data-toggle="modal" data-target="#MessSend" data-id="@user.Id" data-send="@user.FName @user.LName">Send</button>
+                                        @if (ViewBag.Type == "teacher")
+                                        {
+
+                                            <button type="button" class="send mc-btn-3 btn-style-1" data-toggle="modal" data-target="#send-course" data-id="@user.Id" data-send="@user.FName @user.LName">Schedule lesson</button>
+                                        }
+                                    </div>
+                                }
+
                                 <div class="profile-address">
                                     <h5>Country</h5>
                                     <p>@user.Country</p>
@@ -94,6 +123,121 @@
 
 
         }
-        
+    </div>
 </section>
+<div id="MessSend" class="modal modal-box" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("message", "api", FormMethod.Post, new { id = "send-form" }))
+            {
+                <div class="modal-body">
+                    <input type="hidden" id="input-id" name="send" value="" />
+                    <p>To: <span id="to"></span></p>
+                    <textarea name="content"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Send" />
 
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+
+            }
+
+        </div>
+    </div>
+</div>
+
+<div id="send-course" class="modal modal-box" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="user-send-course" action="/api/myapi/" method="post">
+                <div class="modal-body">
+                    <select id="get-course" name="CourseId" class="form-control"></select>
+                    <br />
+                    <input size="16" type="text" name="MyTime" value="" readonly class="form_datetime">
+
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Send" />
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+@section CustomScript{
+    <script type="text/javascript" src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript">
+        $(".form_datetime").datetimepicker({ format: 'yyyy-mm-dd hh:ii' });
+        $('#MessSend').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var author = button.data('send');
+            console.log('modal show');
+            var modal = $(this);
+            modal.find('#to').text(author);
+            modal.find('#input-id').val(button.data('id'));
+
+        });
+
+        $('#send-course').on('show.bs.modal', function (event) {
+
+            var button = $(event.relatedTarget);
+            var id = button.data('id');
+           
+            $.getJSON("/api/myapi/courses/" + id, function (data) {
+                console.log(data);
+                $.each(data, function (key, val) {
+                    console.log(key, val);
+                    $("<option value=" + key + ">" + val + "</option>").appendTo($("#get-course"));
+                });
+            });
+
+
+        });
+        $('#send-form').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/api/myapi/message",
+                data: $(this).serialize(),
+                success: function (data) {
+                    console.log(data);
+                }
+            })
+
+            $('#send-form').find('textarea').val("");
+            $('#MessSend').modal('toggle');
+        });
+
+        $('#user-send-course').submit(function (e) {
+
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/api/myapi/SaveCourseSession",
+                data: $(this).serialize()
+                
+
+
+            });
+            $('#send-course').modal('toggle');
+        });
+    </script>
+}

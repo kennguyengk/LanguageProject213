@@ -16,7 +16,24 @@ namespace LanguageProject.Controllers
             return View();
         }
 
+        public ActionResult MyUser(string id) {
 
+            DAL.DataContext dt = new DAL.DataContext();
+
+            Models.User currentUser = dt.Users.Find(id);
+            Models.UserSettingViewModel model = new Models.UserSettingViewModel()
+            {
+                AvatarPath = currentUser.AvatarPath,
+                FName = currentUser.FName,
+                LName = currentUser.LName,
+                Quote = currentUser.Quote,
+                Email = currentUser.Email
+            };
+
+            ViewBag.User = currentUser;
+            return View(model);
+       
+        }
         public ActionResult Student() {
 
             DAL.DataContext dt = new DAL.DataContext();
@@ -31,7 +48,7 @@ namespace LanguageProject.Controllers
 
         }
 
-        public ActionResult     Teacher() {
+        public ActionResult Teacher() {
 
             DAL.DataContext dt = new DAL.DataContext();
 

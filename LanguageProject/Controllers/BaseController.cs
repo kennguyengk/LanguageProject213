@@ -18,6 +18,7 @@ namespace LanguageProject.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+       
 
         
         public ApplicationSignInManager SignInManager {

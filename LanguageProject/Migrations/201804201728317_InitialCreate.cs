@@ -8,32 +8,37 @@ namespace LanguageProject.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Courses",
+                "dbo.ChatSessions",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Description = c.String(),
-                        Title = c.String(nullable: false),
-                        ImagePanePath = c.String(),
-                        Cost = c.Int(nullable: false),
-                        Language_Id = c.Int(nullable: false),
-                        Teacher_Id = c.String(nullable: false, maxLength: 128),
+                        SenderID = c.String(maxLength: 128),
+                        ReceiveID = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Languages", t => t.Language_Id, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.Teacher_Id, cascadeDelete: true)
-                .Index(t => t.Language_Id)
-                .Index(t => t.Teacher_Id);
+                .ForeignKey("dbo.AspNetUsers", t => t.ReceiveID)
+                .ForeignKey("dbo.AspNetUsers", t => t.SenderID)
+                .Index(t => t.SenderID)
+                .Index(t => t.ReceiveID);
             
             CreateTable(
-                "dbo.Languages",
+                "dbo.Messages",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        FlagImgPath = c.String(),
+                        SenderID = c.String(maxLength: 128),
+                        ReceiveID = c.String(maxLength: 128),
+                        Content = c.String(),
+                        when = c.DateTime(nullable: false),
+                        ChatSession_Id = c.Int(),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.ChatSessions", t => t.ChatSession_Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.ReceiveID)
+                .ForeignKey("dbo.AspNetUsers", t => t.SenderID)
+                .Index(t => t.SenderID)
+                .Index(t => t.ReceiveID)
+                .Index(t => t.ChatSession_Id);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -80,6 +85,34 @@ namespace LanguageProject.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
+                "dbo.Courses",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Description = c.String(),
+                        Title = c.String(nullable: false),
+                        ImagePanePath = c.String(),
+                        Cost = c.Int(nullable: false),
+                        Language_Id = c.Int(nullable: false),
+                        Teacher_Id = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Languages", t => t.Language_Id, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.Teacher_Id, cascadeDelete: true)
+                .Index(t => t.Language_Id)
+                .Index(t => t.Teacher_Id);
+            
+            CreateTable(
+                "dbo.Languages",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        FlagImgPath = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.AspNetUserLogins",
                 c => new
                     {
@@ -120,6 +153,25 @@ namespace LanguageProject.Migrations
                 .Index(t => t.User_Id);
             
             CreateTable(
+                "dbo.CourseSessions",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        When = c.DateTime(nullable: false),
+                        Status = c.String(),
+                        Course_Id = c.Int(),
+                        Student_Id = c.String(maxLength: 128),
+                        Teacher_Id = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Courses", t => t.Course_Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.Student_Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.Teacher_Id)
+                .Index(t => t.Course_Id)
+                .Index(t => t.Student_Id)
+                .Index(t => t.Teacher_Id);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -134,33 +186,52 @@ namespace LanguageProject.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Courses", "Teacher_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.CourseSessions", "Teacher_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.CourseSessions", "Student_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.CourseSessions", "Course_Id", "dbo.Courses");
+            DropForeignKey("dbo.ChatSessions", "SenderID", "dbo.AspNetUsers");
+            DropForeignKey("dbo.ChatSessions", "ReceiveID", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Messages", "SenderID", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Messages", "ReceiveID", "dbo.AspNetUsers");
             DropForeignKey("dbo.LanguageSkills", "User_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.LanguageSkills", "Language_Id", "dbo.Languages");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUsers", "NativeLang_Id", "dbo.Languages");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Courses", "Teacher_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.Courses", "Language_Id", "dbo.Languages");
+            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Messages", "ChatSession_Id", "dbo.ChatSessions");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.CourseSessions", new[] { "Teacher_Id" });
+            DropIndex("dbo.CourseSessions", new[] { "Student_Id" });
+            DropIndex("dbo.CourseSessions", new[] { "Course_Id" });
             DropIndex("dbo.LanguageSkills", new[] { "User_Id" });
             DropIndex("dbo.LanguageSkills", new[] { "Language_Id" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
+            DropIndex("dbo.Courses", new[] { "Teacher_Id" });
+            DropIndex("dbo.Courses", new[] { "Language_Id" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", new[] { "NativeLang_Id" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.Courses", new[] { "Teacher_Id" });
-            DropIndex("dbo.Courses", new[] { "Language_Id" });
+            DropIndex("dbo.Messages", new[] { "ChatSession_Id" });
+            DropIndex("dbo.Messages", new[] { "ReceiveID" });
+            DropIndex("dbo.Messages", new[] { "SenderID" });
+            DropIndex("dbo.ChatSessions", new[] { "ReceiveID" });
+            DropIndex("dbo.ChatSessions", new[] { "SenderID" });
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.CourseSessions");
             DropTable("dbo.LanguageSkills");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
-            DropTable("dbo.AspNetUserClaims");
-            DropTable("dbo.AspNetUsers");
             DropTable("dbo.Languages");
             DropTable("dbo.Courses");
+            DropTable("dbo.AspNetUserClaims");
+            DropTable("dbo.AspNetUsers");
+            DropTable("dbo.Messages");
+            DropTable("dbo.ChatSessions");
         }
     }
 }

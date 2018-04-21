@@ -13,7 +13,7 @@
 
 LanguageProject.DAL.DataContext dt = new LanguageProject.DAL.DataContext();
 LanguageProject.Models.User currentUser = dt.Users.Find(User.Identity.GetUserId());
-if (currentUser.AvatarPath != null)
+if (currentUser != null && currentUser.AvatarPath != null)
 {
 
         <img src="@currentUser.AvatarPath" alt="">
