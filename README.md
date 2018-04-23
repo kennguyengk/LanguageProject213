@@ -3,7 +3,7 @@ Language project
 
 A web application where user can make friend and share the interests in language
 
-[View Full Document on thedocs.org](http://language-project-doc.readthedocs.io)
+[View Full Document on thedocs.org](http://language-project-doc.readthedocs.io)<br/>
 Features
 --------
 
