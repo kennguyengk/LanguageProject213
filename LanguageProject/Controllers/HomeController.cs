@@ -15,7 +15,7 @@ namespace LanguageProject.Controllers
             DAL.DataContext dt = new DAL.DataContext();
             dt.Configuration.LazyLoadingEnabled = false;
             ViewBag.Courses = dt.Courses.Include("Teacher").Include("Language").OrderBy(r => Guid.NewGuid()).Take(4).ToList();
-          //  List<Models.Course> course = 
+        
             return View();
         }
 

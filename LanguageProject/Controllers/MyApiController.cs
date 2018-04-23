@@ -19,7 +19,7 @@ namespace LanguageProject.Controllers
             DAL.DataContext dt = new DAL.DataContext();
             string current_user = User.Identity.GetUserId();
             string send_user = data.Send;
-            //   var object = Request.Content.R
+          
             string content = data.Content;
 
             ChatSession cs;

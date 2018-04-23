@@ -112,20 +112,18 @@ namespace LanguageProject.Controllers
         public ActionResult Mailbox(int id) {
 
 
-            // int session_id = (session_id_para != null ? Int32.Parse(session_id_para) : 0);
             int session_id = id; 
            DAL.DataContext dt = new DAL.DataContext();
            dt.Configuration.LazyLoadingEnabled = false;
            User currentUser = dt.Users.Find(User.Identity.GetUserId());
-            // List<CMessage> mess = new List<Message>();
+          
             List<ChatSession> cs = dt.ChatSessions.Include("Sender").Include("Receive").Where(c => c.ReceiveID == currentUser.Id || c.SenderID == currentUser.Id).ToList();
 
-         //   first = dt.Messages.Include("Sender").Include("Receive").Where(m => m.ReceiveID == currentUser.Id).ToList();
-            // mess = dt.Messages.Include("Sender").Include("Receive").Where(m => m.ReceiveID == currentUser.Id).GroupBy(m=>m.Sender).ToList();
+        
             Models.UserSettingViewModel model = new Models.UserSettingViewModel()
             {
                 Balance = currentUser.Balance,
-             //   Messages = mess,
+         
                 FName = currentUser.FName,
                 LName = currentUser.LName,
                 UserId = User.Identity.GetUserId(),
@@ -160,7 +158,7 @@ namespace LanguageProject.Controllers
 
             DAL.DataContext dt = new DAL.DataContext();
             dt.Configuration.LazyLoadingEnabled = false;
-            // User currentUser = dt.Users.Find(User.Identity.GetUserId());
+          
             string current_id = User.Identity.GetUserId();
             List<Course> cs = dt.Courses.Where(c => c.Teacher.Id == current_id).ToList();
             ViewBag.Course = cs;

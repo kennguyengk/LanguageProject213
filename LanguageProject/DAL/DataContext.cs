@@ -26,7 +26,7 @@ namespace LanguageProject.DAL
         public DbSet<LanguageSkill> SecondLanguages { get; set; } 
         public DbSet<Course> Courses { get; set; }
         public DbSet<Languages> Languages { get; set; }
-        //public DbSet<User>
+      
 
 
         public DbSet<Message> Messages { get; set; }
